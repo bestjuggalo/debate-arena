@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Debate {
+  id              String    @id @default(cuid())
+  topic           String
+  status          String    @default("PENDING")
+  forArgument     String?
+  againstArgument String?
+  errorMessage    String?
+  createdAt       DateTime  @default(now())
+  completedAt     DateTime?
+  votes           Vote[]
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Vote {
+  id        String   @id @default(cuid())
+  debateId  String
+  side      String
+  ipHash    String
+  createdAt DateTime @default(now())
+  debate    Debate   @relation(fields: [debateId], references: [id])
+
+  @@unique([debateId, ipHash])
+  @@index([debateId])
+}
