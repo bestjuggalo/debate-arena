@@ -1,10 +1,1 @@
-{
-  "functions": {
-    "app/api/internal/generate/route.ts": {
-      "maxDuration": 60
-    },
-    "app/api/debates/route.ts": {
-      "maxDuration": 60
-    }
-  }
-}
+{}

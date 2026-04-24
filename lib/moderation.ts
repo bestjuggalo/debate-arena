@@ -37,10 +37,10 @@ Respond with JSON only: {"approved": true} or {"approved": false, "reason": "bri
     try {
       return JSON.parse(text);
     } catch {
-      return { approved: true }; // fail open on parse error
+      return { approved: true };
     }
   } catch (error) {
     console.error("Moderation error:", error);
-    return { approved: true }; // fail open if moderation service is down
+    return { approved: true };
   }
 }

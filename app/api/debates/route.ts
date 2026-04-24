@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
 
     const debate = await prisma.debate.create({ data: { topic, status: "PENDING" } });
 
-    // Fire-and-forget async generation
+    // Fire-and-forget: works on Railway because it's a long-lived server process
     generateDebateAsync(debate.id, topic);
 
     return NextResponse.json({ id: debate.id, status: "PENDING" }, { status: 201 });
